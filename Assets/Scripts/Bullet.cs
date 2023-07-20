@@ -14,14 +14,11 @@ public class Bullet : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     public Sprite img;
 
-    private BoxCollider2D collider;
-
     private void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
         bulletRB = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        collider = GetComponent<BoxCollider2D>();
     }
     private void FixedUpdate()
     {
@@ -46,7 +43,7 @@ public class Bullet : MonoBehaviour
             collision.GetComponent<EnemyShip>().TakeDamage(damage);
             if (collision.GetComponent<EnemyShip>().isDestroyed)
             {
-                gameManager.AddScore(10);
+                gameManager.AddScore(75);
             }
             DestroyBullet();
         }
@@ -62,7 +59,7 @@ public class Bullet : MonoBehaviour
 
     void DestroyBullet()
     {
-        collider.enabled = false;
+        gameObject.GetComponent<BoxCollider2D>().enabled = false;
         spriteRenderer.sprite = img;
         StartCoroutine(BulletDestroy());
     }
