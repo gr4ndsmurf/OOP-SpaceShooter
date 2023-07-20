@@ -47,4 +47,5 @@ The classes utilize encapsulation to hide the implementation details and provide
 
 - [Sprites](https://kenney.nl/assets/space-shooter-redux)
 - [Audio](https://kenney.nl/assets/sci-fi-sounds)
+- Developed by [gr4ndsmurf](https://github.com/gr4ndsmurf)
 
