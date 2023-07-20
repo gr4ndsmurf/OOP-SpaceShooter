@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerShip : Ship
 {
+    private bool shootingDelayed;
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -31,10 +32,21 @@ public class PlayerShip : Ship
 
     public override void Shoot()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space))
         {
-            Instantiate(bullet, gunPoint.position,transform.rotation);
+            if (shootingDelayed == false)
+            {
+                shootingDelayed = true;
+                Instantiate(bullet, gunPoint.position, transform.rotation);
+                StartCoroutine(shootingDelay());
+            }
         }
+    }
+
+    IEnumerator shootingDelay()
+    {
+        yield return new WaitForSeconds(0.15f);
+        shootingDelayed = false;
     }
 
     public void IncreaseHealth()
