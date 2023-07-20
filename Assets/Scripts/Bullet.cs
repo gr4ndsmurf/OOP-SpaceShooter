@@ -42,6 +42,10 @@ public class Bullet : MonoBehaviour
             }
             Destroy(gameObject);
         }
+        if (collision.collider.CompareTag("Bullet"))
+        {
+            Destroy(gameObject);
+        }
     }
 
     IEnumerator BulletRange()

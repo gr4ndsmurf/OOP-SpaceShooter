@@ -39,11 +39,20 @@ public class PlayerShip : Ship
 
     public void IncreaseHealth()
     {
-
+        if (health < 3)
+        {
+            health++;
+        }
     }
 
     public void IncreaseSpeed()
     {
-
+        speed *= 2;
+        StartCoroutine(SpeedCooldown());
+    }
+    IEnumerator SpeedCooldown()
+    {
+        yield return new WaitForSeconds(3f);
+        speed /= 2;
     }
 }
