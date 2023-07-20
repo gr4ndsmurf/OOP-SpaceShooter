@@ -19,6 +19,8 @@ The project demonstrates the use of Object-Oriented Programming (OOP) techniques
 - Avoid colliding with enemy ships and their bullets.
 - Destroy as many enemy ships as possible to increase your score.
 
+![Space Shooter](screenshot2.png)
+
 ## OOP Techniques Used
 
 ### Class and Object
