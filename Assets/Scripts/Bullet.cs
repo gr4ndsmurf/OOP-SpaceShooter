@@ -5,22 +5,48 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public int damage;
-    void Update()
+    public int bulletSpeed;
+
+    private GameManager gameManager;
+
+    private Rigidbody2D bulletRB;
+
+    private void Start()
     {
-        // Mermi Hareketi
+        gameManager = FindObjectOfType<GameManager>();
+        bulletRB = GetComponent<Rigidbody2D>();
+    }
+    private void FixedUpdate()
+    {
+        bulletRB.velocity = transform.up * bulletSpeed;
+        StartCoroutine(BulletRange());
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.transform.CompareTag("PlayerShip"))
         {
-            collision.GetComponent<PlayerShip>().TakeDamage(damage);
+            collision.collider.GetComponent<PlayerShip>().TakeDamage(damage);
+            if (collision.collider.GetComponent<PlayerShip>().isDestroyed)
+            {
+                gameManager.GameOver();
+            }
             Destroy(gameObject);
         }
         if (collision.transform.CompareTag("EnemyShip"))
         {
-            collision.GetComponent<EnemyShip>().TakeDamage(damage);
+            collision.collider.GetComponent<EnemyShip>().TakeDamage(damage);
+            if (collision.collider.GetComponent<EnemyShip>().isDestroyed)
+            {
+                gameManager.AddScore(10);
+            }
             Destroy(gameObject);
         }
+    }
+
+    IEnumerator BulletRange()
+    {
+        yield return new WaitForSeconds(2f);
+        Destroy(gameObject);
     }
 }

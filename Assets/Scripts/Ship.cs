@@ -4,9 +4,18 @@ using UnityEngine;
 
 public abstract class Ship : MonoBehaviour
 {
+    [SerializeField]
     protected int health;
+    [SerializeField]
     protected int speed;
-    protected bool isDestroyed;
+    [SerializeField]
+    protected GameObject bullet;
+    [SerializeField]
+    protected Transform gunPoint;
+
+    protected Rigidbody2D rb;
+
+    public bool isDestroyed;
 
     public abstract void Move();
     public abstract void Shoot();
@@ -24,5 +33,6 @@ public abstract class Ship : MonoBehaviour
     {
         isDestroyed = true;
         // Gemiyi yok etme iþlemleri
+        Destroy(gameObject);
     }
 }
