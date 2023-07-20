@@ -1,7 +1,9 @@
 # OOP-SpaceShooter
 This project was inspired by the classic space shooter games and developed as a demonstration of object-oriented programming techniques in Unity.
 
-![Space Shooter](screenshot2.png)
+- [Itch.io](https://gr4ndsmurf.itch.io/oop-space-shooter-clone)
+
+![Space Shooter](screenshot00.png)
 
 ## Description
 
