@@ -101,6 +101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 1
   bulletSpeed: 10
+  img: {fileID: 21300000, guid: 51ab05ef81b88054f93e620abf3bf59f, type: 3}
 --- !u!61 &3023849634610327682
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -147,4 +148,4 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4

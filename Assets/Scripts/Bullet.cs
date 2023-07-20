@@ -11,10 +11,14 @@ public class Bullet : MonoBehaviour
 
     private Rigidbody2D bulletRB;
 
+    private SpriteRenderer spriteRenderer;
+    public Sprite img;
+
     private void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
         bulletRB = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
     private void FixedUpdate()
     {
@@ -31,7 +35,8 @@ public class Bullet : MonoBehaviour
             {
                 gameManager.GameOver();
             }
-            Destroy(gameObject);
+            spriteRenderer.sprite = img;
+            StartCoroutine(BulletDestroy());
         }
         if (collision.transform.CompareTag("EnemyShip"))
         {
@@ -40,17 +45,30 @@ public class Bullet : MonoBehaviour
             {
                 gameManager.AddScore(10);
             }
-            Destroy(gameObject);
+            spriteRenderer.sprite = img;
+            StartCoroutine(BulletDestroy());
         }
         if (collision.collider.CompareTag("Bullet"))
         {
-            Destroy(gameObject);
+            spriteRenderer.sprite = img;
+            StartCoroutine(BulletDestroy());
+        }
+        if (collision.collider.CompareTag("Meteor"))
+        {
+            spriteRenderer.sprite = img;
+            StartCoroutine(BulletDestroy());
         }
     }
 
     IEnumerator BulletRange()
     {
         yield return new WaitForSeconds(2f);
+        Destroy(gameObject);
+    }
+
+    IEnumerator BulletDestroy()
+    {
+        yield return new WaitForSeconds(0.05f);
         Destroy(gameObject);
     }
 }
