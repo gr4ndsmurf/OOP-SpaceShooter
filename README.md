@@ -1,7 +1,7 @@
 # OOP-SpaceShooter
 This project was inspired by the classic space shooter games and developed as a demonstration of object-oriented programming techniques in Unity.
 
-![Space Shooter](screenshot.png)
+![Space Shooter](screenshot2.png)
 
 ## Description
 
