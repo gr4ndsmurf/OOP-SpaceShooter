@@ -34,7 +34,7 @@ public class PowerUpSpawner : MonoBehaviour
     {
         Transform spawnPoint = powerUpPoints[Random.Range(0, powerUpPoints.Count)];
         GameObject powerUp = powerUpPrefabs[Random.Range(0, powerUpPrefabs.Length)];
-        Instantiate(powerUp, spawnPoint.position, Quaternion.identity);
+        Instantiate(powerUp, spawnPoint.position, powerUp.transform.rotation);
         powerUpPoints.Remove(spawnPoint);
     }
 }

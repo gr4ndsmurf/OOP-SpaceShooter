@@ -4,8 +4,7 @@ using UnityEngine;
 
 public abstract class Ship : MonoBehaviour
 {
-    [SerializeField]
-    protected int health;
+    public int health;
     [SerializeField]
     protected int speed;
     [SerializeField]

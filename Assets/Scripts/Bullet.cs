@@ -14,50 +14,57 @@ public class Bullet : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     public Sprite img;
 
+    private BoxCollider2D collider;
+
     private void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
         bulletRB = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        collider = GetComponent<BoxCollider2D>();
     }
     private void FixedUpdate()
     {
         bulletRB.velocity = transform.up * bulletSpeed;
         StartCoroutine(BulletRange());
+
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.transform.CompareTag("PlayerShip"))
         {
-            collision.collider.GetComponent<PlayerShip>().TakeDamage(damage);
-            if (collision.collider.GetComponent<PlayerShip>().isDestroyed)
+            collision.GetComponent<PlayerShip>().TakeDamage(damage);
+            if (collision.GetComponent<PlayerShip>().isDestroyed)
             {
                 gameManager.GameOver();
             }
-            spriteRenderer.sprite = img;
-            StartCoroutine(BulletDestroy());
+            DestroyBullet();
         }
         if (collision.transform.CompareTag("EnemyShip"))
         {
-            collision.collider.GetComponent<EnemyShip>().TakeDamage(damage);
-            if (collision.collider.GetComponent<EnemyShip>().isDestroyed)
+            collision.GetComponent<EnemyShip>().TakeDamage(damage);
+            if (collision.GetComponent<EnemyShip>().isDestroyed)
             {
                 gameManager.AddScore(10);
             }
-            spriteRenderer.sprite = img;
-            StartCoroutine(BulletDestroy());
+            DestroyBullet();
         }
-        if (collision.collider.CompareTag("Bullet"))
+        if (collision.CompareTag("Bullet"))
         {
-            spriteRenderer.sprite = img;
-            StartCoroutine(BulletDestroy());
+            DestroyBullet();
         }
-        if (collision.collider.CompareTag("Meteor"))
+        if (collision.CompareTag("Meteor"))
         {
-            spriteRenderer.sprite = img;
-            StartCoroutine(BulletDestroy());
+            DestroyBullet();
         }
+    }
+
+    void DestroyBullet()
+    {
+        collider.enabled = false;
+        spriteRenderer.sprite = img;
+        StartCoroutine(BulletDestroy());
     }
 
     IEnumerator BulletRange()
